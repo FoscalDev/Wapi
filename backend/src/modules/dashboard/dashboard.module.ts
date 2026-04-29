@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { PermissionsGuard } from '../auth/permissions.guard';
 import { DashboardController } from './dashboard.controller';
 import { MessageLog, MessageLogSchema } from '../logging/schemas/message-log.schema';
 import { RoutingLog, RoutingLogSchema } from '../logging/schemas/routing-log.schema';
@@ -13,6 +14,6 @@ import { RoutingLog, RoutingLogSchema } from '../logging/schemas/routing-log.sch
     ]),
   ],
   controllers: [DashboardController],
-  providers: [JwtAuthGuard],
+  providers: [JwtAuthGuard, PermissionsGuard],
 })
 export class DashboardModule {}

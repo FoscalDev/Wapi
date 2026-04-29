@@ -29,7 +29,7 @@ export class WebhookController {
     const raw = Buffer.isBuffer(req.body)
       ? req.body
       : Buffer.from(JSON.stringify(req.body ?? {}));
-    this.webhookService.validateSignature(raw, signature);
+    await this.webhookService.validateSignature(raw, signature);
 
     const body = Buffer.isBuffer(req.body)
       ? (JSON.parse(req.body.toString('utf8')) as Record<string, any>)

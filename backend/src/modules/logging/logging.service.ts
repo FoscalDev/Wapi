@@ -32,4 +32,26 @@ export class LoggingService {
     if (filters.status) query.status = filters.status;
     return this.routingModel.find(query).sort({ processed_at: -1 }).limit(200).lean();
   }
+
+  async deleteMessageLogsByDateRange(from: Date, to: Date) {
+    const result = await this.messageModel.deleteMany({
+      received_at: { $gte: from, $lte: to },
+    });
+    return {
+      deleted_count: result.deletedCount ?? 0,
+      from: from.toISOString(),
+      to: to.toISOString(),
+    };
+  }
+
+  async deleteRoutingLogsByDateRange(from: Date, to: Date) {
+    const result = await this.routingModel.deleteMany({
+      processed_at: { $gte: from, $lte: to },
+    });
+    return {
+      deleted_count: result.deletedCount ?? 0,
+      from: from.toISOString(),
+      to: to.toISOString(),
+    };
+  }
 }

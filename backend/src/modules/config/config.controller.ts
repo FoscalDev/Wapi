@@ -10,6 +10,8 @@ import {
 } from '@nestjs/common';
 import { IsBoolean, IsEnum, IsOptional, IsString, IsUrl } from 'class-validator';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RequirePermissions } from '../auth/permissions.decorator';
+import { PermissionsGuard } from '../auth/permissions.guard';
 import { ConfigServiceApp } from './config.service';
 import { AuthType } from './schemas/whatsapp-config.schema';
 
@@ -31,7 +33,8 @@ class UpsertConfigDto {
   is_active!: boolean;
 }
 
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, PermissionsGuard)
+@RequirePermissions('configs.manage')
 @Controller('configs')
 export class ConfigController {
   constructor(private readonly configService: ConfigServiceApp) {}
@@ -54,5 +57,10 @@ export class ConfigController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.configService.remove(id);
+  }
+
+  @Post(':id/test-webhook')
+  testWebhook(@Param('id') id: string) {
+    return this.configService.testWebhook(id);
   }
 }

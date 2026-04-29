@@ -197,3 +197,14 @@ td {
   background: #fee2e2;
   color: #991b1b;
 }
+
+.permission-grid {
+  display: grid;
+  gap: 6px;
+}
+
+.permission-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}

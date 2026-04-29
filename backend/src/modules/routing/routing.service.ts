@@ -65,6 +65,7 @@ export class RoutingService {
         status: 'success',
         attempts: attempt,
         http_status: response.status,
+        request_body: payload,
         response_body: response.data as Record<string, unknown>,
         latency_ms: Date.now() - started,
       });
@@ -78,6 +79,7 @@ export class RoutingService {
         status: 'failed',
         attempts: attempt,
         http_status: err.response?.status,
+        request_body: payload,
         response_body: (err.response?.data as Record<string, unknown>) || {},
         error_message: err.message,
         latency_ms: Date.now() - started,

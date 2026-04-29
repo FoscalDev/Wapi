@@ -4,11 +4,11 @@
 export function validateEnv(config: Record<string, unknown>): Record<string, unknown> {
   const required: string[] = [
     'JWT_SECRET',
+    'GOOGLE_CLIENT_ID',
     'MONGODB_URI',
     'META_VERIFY_TOKEN',
     'META_APP_SECRET',
     'ADMIN_EMAIL',
-    'ADMIN_PASSWORD',
   ];
   const missing = required.filter(
     (key) => config[key] == null || String(config[key]).trim() === '',

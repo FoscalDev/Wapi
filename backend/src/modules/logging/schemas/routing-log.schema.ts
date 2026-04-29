@@ -26,6 +26,9 @@ export class RoutingLog {
   @Prop({ type: Object })
   response_body?: Record<string, unknown>;
 
+  @Prop({ type: Object })
+  request_body?: Record<string, unknown>;
+
   @Prop()
   error_message?: string;
 

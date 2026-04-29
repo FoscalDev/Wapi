@@ -34,9 +34,29 @@ export type RoutingLog = {
   app_name: string;
   status: 'pending' | 'success' | 'failed';
   http_status?: number;
+  request_body?: Record<string, unknown>;
   response_body?: Record<string, unknown>;
   error_message?: string;
   attempts: number;
   latency_ms?: number;
   processed_at: string;
+};
+
+export type AppPermission =
+  | 'dashboard.read'
+  | 'configs.manage'
+  | 'logs.read'
+  | 'logs.manage'
+  | 'settings.manage'
+  | 'users.manage'
+  | '*';
+
+export type AppUser = {
+  id: string;
+  email: string;
+  full_name: string;
+  avatar_url?: string;
+  is_active: boolean;
+  permissions: AppPermission[];
+  can_access: boolean;
 };
