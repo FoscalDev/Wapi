@@ -1,0 +1,13 @@
+{
+  "event_type": "routing",
+  "phone_number_id": "123",
+  "target_webhook": "https://app-interna.com/webhook",
+  "app_name": "App Citas",
+  "status": "success",
+  "http_status": 200,
+  "response_body": { "ok": true },
+  "error_message": null,
+  "attempts": 1,
+  "latency_ms": 120,
+  "processed_at": "2026-04-28T10:30:01.000Z"
+}

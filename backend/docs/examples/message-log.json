@@ -1,0 +1,10 @@
+{
+  "event_type": "incoming_message",
+  "phone_number_id": "123",
+  "display_phone_number": "3001234567",
+  "from": "573001112233",
+  "message_type": "text",
+  "message_content": "Hola",
+  "raw_payload": {},
+  "received_at": "2026-04-28T10:30:00.000Z"
+}
