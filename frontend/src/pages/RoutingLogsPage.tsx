@@ -12,6 +12,7 @@ export const RoutingLogsPage = () => {
   const [deleteError, setDeleteError] = useState('');
   const [deleteResult, setDeleteResult] = useState('');
   const [deleteRange, setDeleteRange] = useState({ from: '', to: '' });
+  const [deleteConfirmText, setDeleteConfirmText] = useState('');
   const currentUser = (() => {
     const raw = localStorage.getItem('user');
     if (!raw) return null;
@@ -44,6 +45,10 @@ export const RoutingLogsPage = () => {
     setDeleteResult('');
     if (!deleteRange.from || !deleteRange.to) {
       setDeleteError('Debes ingresar fecha desde y hasta.');
+      return;
+    }
+    if (deleteConfirmText.trim().toUpperCase() !== 'ELIMINAR') {
+      setDeleteError('Debes escribir ELIMINAR para confirmar.');
       return;
     }
     setDeleting(true);
@@ -119,6 +124,9 @@ export const RoutingLogsPage = () => {
         <div className="modal-backdrop" onClick={() => setShowDeleteModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <h3>Eliminar logs de enrutamiento por rango</h3>
+            <p style={{ marginTop: 0 }}>
+              Esta accion es irreversible. Escribe <strong>ELIMINAR</strong> para confirmar.
+            </p>
             <div className="filters">
               <label>
                 Desde
@@ -144,6 +152,14 @@ export const RoutingLogsPage = () => {
                       to: e.target.value,
                     }))
                   }
+                />
+              </label>
+              <label>
+                Confirmacion
+                <input
+                  placeholder="ELIMINAR"
+                  value={deleteConfirmText}
+                  onChange={(e) => setDeleteConfirmText(e.target.value)}
                 />
               </label>
             </div>
